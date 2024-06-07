@@ -42,4 +42,58 @@ public class nQueen {
         return board;
     }
 
+    /** A recursive way to search for the solution of the n-queen problem.
+     * @param board
+     * @return
+     */
+    public static void recursiveNQueen(int[][] board){
+
+    }
+
+    /** A function to check whether the current square is safe for placing the queen
+     *
+     * @param board
+     * @param x
+     * @param y
+     * @return
+     */
+    public static boolean queenSafeSquare(int[][] board,int x,int y){
+        // Row condition Verify
+        for(int j=0;j<board.length;j++){
+           if(board[x][j]==1){
+               return false;
+           }
+        }
+        // Column condition Verify
+        for(int i=0;i<board.length;i++){
+            if(board[x][i]==1){
+                return false;
+            }
+        }
+        // Diagonal condition Verify
+        // For Diagonals the slope is equals to either 1 or -1.
+        for(int i=0;i<board.length;i++){
+           for(int j=0;j<board.length;j++){
+
+           }
+        }
+
+        return true;
+    }
+    /** Method to check the complete condition of the problem*/
+    public static boolean completeCondition(int[][] board){
+        int countQueens=0;
+       for(int i=0;i<board.length;i++){
+           for(int j=0;j<board.length;j++){
+               if(board[i][j]==1){
+                  countQueens++;
+               }
+           }
+       }
+       if(countQueens==8){
+           return true;
+       }
+       return false;
+    }
+
 }
