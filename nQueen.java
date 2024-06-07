@@ -6,6 +6,10 @@ public class nQueen {
         Scanner scanner = new Scanner(System.in);
         int squares = scanner.nextInt();
         int[][] board = boardCreation(squares);
+        int[][] sampleBoard = new int[][]{{0,1,0,0},{0,0,0,1},{1,0,0,0},{0,0,0,0}};
+        System.out.println(completeCondition(sampleBoard));
+        System.out.println(queenSafeSquare(sampleBoard,3,2));
+        System.out.println(queenSafeSquare(sampleBoard,3,3));
 
     }
 
@@ -51,6 +55,7 @@ public class nQueen {
     }
 
     /** A function to check whether the current square is safe for placing the queen
+     * The Inputs for x and y must be of the form {0,....,n}
      *
      * @param board
      * @param x
@@ -66,7 +71,7 @@ public class nQueen {
         }
         // Column condition Verify
         for(int i=0;i<board.length;i++){
-            if(board[x][i]==1){
+            if(board[i][y]==1){
                 return false;
             }
         }
@@ -74,7 +79,17 @@ public class nQueen {
         // For Diagonals the slope is equals to either 1 or -1.
         for(int i=0;i<board.length;i++){
            for(int j=0;j<board.length;j++){
-
+               int yResult = Math.abs(y-j);
+               int xResult = Math.abs(x-i);
+               if(xResult ==0){
+                   continue;
+               }
+               int slope = yResult/xResult;
+               if(slope == 1 && yResult%xResult==0){
+                   if(board[i][j]==1){
+                      return false;
+                   }
+               }
            }
         }
 
@@ -90,7 +105,7 @@ public class nQueen {
                }
            }
        }
-       if(countQueens==8){
+       if(countQueens==board.length){
            return true;
        }
        return false;
