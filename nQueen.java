@@ -6,8 +6,6 @@ public class nQueen {
         Scanner scanner = new Scanner(System.in);
         int squares = scanner.nextInt();
         int[][] board = boardCreation(squares);
-        int[][] sampleBoard = new int[][]{{0,1,0,0},{0,0,0,1},{1,0,0,0},{0,0,0,0}};
-        boardRepresentation(sampleBoard);
         recursiveNQueen(board,0,0);
         boardRepresentation(board);
 
@@ -86,6 +84,10 @@ public class nQueen {
                  }
              }
              for(int i=0;i<board.length;i++){
+                 if(x-2<0){
+                     System.out.println("Solution Not Found!");
+                     return -1;
+                 }
                  if(board[x-2][i]==1){
                      board[x-2][i]=0;
                      return recursiveNQueen(board,x-2,i+1);
@@ -96,10 +98,6 @@ public class nQueen {
           }
       }
       return -1;
-
-
-
-
     }
 
     /** A function to check whether the current square is safe for placing the queen
