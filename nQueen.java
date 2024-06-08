@@ -49,27 +49,53 @@ public class nQueen {
     /** A recursive way to search for the solution of the n-queen problem.
      *  Here x and y are two coordinates which are used to pass the position
      *  to the recursive call.
-     *  It is tail Recursive/ Iterative Program.
      * @param board
      * @return
      */
     public static void recursiveNQueen(int[][] board,int x,int y){
-        if(x==board.length){
-            System.out.println("No solution");
+        // Base case
+        if(completeCondition(board)){
+            System.out.println("Solution Obtained!");
             return;
         }
+
+        // Checking the safety of the square
       if(queenSafeSquare(board,x,y)){
+          // Inserting the queen if safe
          board[x][y]=1;
       }
 
-      if(completeCondition(board)){
-          System.out.println("Solution Obtained!");
-          return;
-      }
+      // Recursive Call on next element.
       if(y<board.length-1){
           recursiveNQueen(board,x,++y);
       } else{
-          recursiveNQueen(board,++x,0);
+          // Handling Backtracking in case of no solution.
+          boolean conditionBacktrack=true;
+          for(int i=0;i<board.length;i++){
+              if(board[x][i]==1){
+                 conditionBacktrack = false;
+              }
+          }
+          if(conditionBacktrack){
+             for(int i=0;i<board.length;i++){
+                 if(board[x-1][i]==1){
+                     board[x-1][i]=0;
+                     if(i+1<board.length){
+                        recursiveNQueen(board,x-1,i+1);
+                        return;
+                     }
+                 }
+             }
+             for(int i=0;i<board.length;i++){
+                 if(board[x-2][i]==1){
+                     board[x-2][i]=0;
+                     recursiveNQueen(board,x-2,i+1);
+                     return;
+                 }
+             }
+          }else{
+              recursiveNQueen(board,++x,0);
+          }
       }
 
 
