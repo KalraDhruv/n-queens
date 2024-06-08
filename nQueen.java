@@ -7,9 +7,9 @@ public class nQueen {
         int squares = scanner.nextInt();
         int[][] board = boardCreation(squares);
         int[][] sampleBoard = new int[][]{{0,1,0,0},{0,0,0,1},{1,0,0,0},{0,0,0,0}};
-        System.out.println(completeCondition(sampleBoard));
-        System.out.println(queenSafeSquare(sampleBoard,3,2));
-        System.out.println(queenSafeSquare(sampleBoard,3,3));
+        boardRepresentation(sampleBoard);
+        recursiveNQueen(board,0,0);
+        boardRepresentation(board);
 
     }
 
@@ -28,7 +28,7 @@ public class nQueen {
                    System.out.print("- ");
                }
            }
-           System.out.print(" }");
+           System.out.println("}");
        }
     }
 
@@ -47,10 +47,33 @@ public class nQueen {
     }
 
     /** A recursive way to search for the solution of the n-queen problem.
+     *  Here x and y are two coordinates which are used to pass the position
+     *  to the recursive call.
+     *  It is tail Recursive/ Iterative Program.
      * @param board
      * @return
      */
-    public static void recursiveNQueen(int[][] board){
+    public static void recursiveNQueen(int[][] board,int x,int y){
+        if(x==board.length){
+            System.out.println("No solution");
+            return;
+        }
+      if(queenSafeSquare(board,x,y)){
+         board[x][y]=1;
+      }
+
+      if(completeCondition(board)){
+          System.out.println("Solution Obtained!");
+          return;
+      }
+      if(y<board.length-1){
+          recursiveNQueen(board,x,++y);
+      } else{
+          recursiveNQueen(board,++x,0);
+      }
+
+
+
 
     }
 
