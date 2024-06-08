@@ -52,11 +52,11 @@ public class nQueen {
      * @param board
      * @return
      */
-    public static void recursiveNQueen(int[][] board,int x,int y){
+    public static int recursiveNQueen(int[][] board,int x,int y){
         // Base case
         if(completeCondition(board)){
             System.out.println("Solution Obtained!");
-            return;
+            return 0;
         }
 
         // Checking the safety of the square
@@ -67,7 +67,7 @@ public class nQueen {
 
       // Recursive Call on next element.
       if(y<board.length-1){
-          recursiveNQueen(board,x,++y);
+          return recursiveNQueen(board,x,++y);
       } else{
           // Handling Backtracking in case of no solution.
           boolean conditionBacktrack=true;
@@ -81,22 +81,21 @@ public class nQueen {
                  if(board[x-1][i]==1){
                      board[x-1][i]=0;
                      if(i+1<board.length){
-                        recursiveNQueen(board,x-1,i+1);
-                        return;
+                        return recursiveNQueen(board,x-1,i+1);
                      }
                  }
              }
              for(int i=0;i<board.length;i++){
                  if(board[x-2][i]==1){
                      board[x-2][i]=0;
-                     recursiveNQueen(board,x-2,i+1);
-                     return;
+                     return recursiveNQueen(board,x-2,i+1);
                  }
              }
           }else{
-              recursiveNQueen(board,++x,0);
+              return recursiveNQueen(board,++x,0);
           }
       }
+      return -1;
 
 
 
